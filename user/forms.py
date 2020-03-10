@@ -1,15 +1,16 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from blog.models import Utilizador
+from .models import Utilizador
+from django.core import validators
 
 
 class UserRegisterForm(forms.Form):
-    name=forms.CharField(max_length=45,label="Nome")
+    name=forms.CharField(max_length=45,label="Nome",required=False)
     username=forms.CharField(max_length=45,label="username")
-    email = forms.EmailField(max_length=45,label="Email")
-    telefone=forms.CharField(max_length=45,label="Telefone/Telemovel")
-    password1=forms.CharField(max_length=45,label="Password",widget=forms.PasswordInput())
-    password2=forms.CharField(max_length=45,label="Password Confirm",widget=forms.PasswordInput())
+    email = forms.EmailField(max_length=45,label="Email",required=False)
+    telefone=forms.CharField(max_length=45,label="Telefone/Telemovel",required=False)
+    password1=forms.CharField(max_length=45,label="Password",widget=forms.PasswordInput(),validators = [validators.MinLengthValidator(6)],required=False)
+    password2=forms.CharField(max_length=45,label="Password Confirm",widget=forms.PasswordInput(),required=False)
 
     class Meta:
         model=Utilizador
@@ -21,6 +22,8 @@ class UserRegisterForm(forms.Form):
             email=data['email'],telefone=data['telefone'],password=data['password1'])
         user.save()
     
-    def is_valid(self):
-        data=self.cleaned_data
-        #if(data[])
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if len(password) < 4:
+            raise forms.ValidationError("password is too short")
+        return password
