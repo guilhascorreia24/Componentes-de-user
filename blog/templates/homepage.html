@@ -54,6 +54,7 @@
  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
 
 </head>
 
@@ -64,13 +65,12 @@
         <nav data-v-a67fe1ba="" data-v-8716d23a="" role="navigation" aria-label="main navigation" class="navbar" style="
         margin: 0%;
     ">
-            <div class="navbar-brand" style="padding:0%"><a data-v-a67fe1ba="" href="/"
-                    class="navbar-item logo"><img src="{% static "img/logo-navbar.1a946f02.png" %}" data-v-a67fe1ba=""
-                        alt="Dia Aberto"></a><a role="button" aria-label="menu"
-                    class="navbar-burger burger"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+            <div class="navbar-brand" style="padding:0%">
+                <a data-v-a67fe1ba="" href="/" class="navbar-item logo"><img src="{% static "img/logo-navbar.1a946f02.png" %}" data-v-a67fe1ba="" alt="Dia Aberto"></a>
+                <a role="button" aria-label="menu" class="navbar-burger burger"  data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span
                         aria-hidden="true"></span></a></div>
-                        {% block content %}
-            <div class="navbar-menu">
+                            {% block content %}         
+            <div class=" collapse navbar-collapse" id="navbarSupportedContent1">
                 <div class="navbar-end">
                     <div data-v-a67fe1ba="" class="navbar-item">
                         <div data-v-a67fe1ba="" class="dropdown is-bottom-left is-mobile-modal">
@@ -130,6 +130,17 @@
             <div data-v-8716d23a="" style="margin: auto; width: max-content;"> Dia Aberto </div>
         </footer>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="notices is-top"><div role="alert" class="toast is-dark is-top" aria-hidden="true" style="display: none;"><div>Transporte adicionado!</div></div></div>
+    {% endfor %}
+  {% endif %}
+    <div class="notices is-bottom"></div>
+    <script>window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 2000);</script>
 </body>
 
 </html>
