@@ -5,12 +5,12 @@ from django.core import validators
 
 
 class UserRegisterForm(forms.Form):
-    name=forms.CharField(max_length=45,label="Nome",required=False)
+    name=forms.CharField(max_length=45,label="Nome")
     username=forms.CharField(max_length=45,label="username")
-    email = forms.EmailField(max_length=45,label="Email",required=False)
-    telefone=forms.CharField(max_length=45,label="Telefone/Telemovel",required=False)
-    password1=forms.CharField(max_length=45,label="Password",widget=forms.PasswordInput(),validators = [validators.MinLengthValidator(6)],required=False)
-    password2=forms.CharField(max_length=45,label="Password Confirm",widget=forms.PasswordInput(),required=False)
+    email = forms.EmailField(max_length=45,label="Email")
+    telefone=forms.CharField(max_length=45,label="Telefone/Telemovel")
+    password1=forms.CharField(max_length=45,label="Password",widget=forms.PasswordInput(),validators = [validators.MinLengthValidator(6)])
+    password2=forms.CharField(max_length=45,label="Password Confirm",widget=forms.PasswordInput())
 
     class Meta:
         model=Utilizador
